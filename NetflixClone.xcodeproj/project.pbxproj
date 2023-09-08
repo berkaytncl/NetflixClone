@@ -21,6 +21,7 @@
 		EB9CC3B12AA7C9C200AF7E7F /* DownloadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9CC3B02AA7C9C200AF7E7F /* DownloadsViewController.swift */; };
 		EBF44C0F2AAB2AD0002FC854 /* APICaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF44C0E2AAB2AD0002FC854 /* APICaller.swift */; };
 		EBF44C112AAB440F002FC854 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF44C102AAB440F002FC854 /* Movie.swift */; };
+		EBF44C132AAB5D27002FC854 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF44C122AAB5D27002FC854 /* Extension+String.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		EB9CC3B02AA7C9C200AF7E7F /* DownloadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsViewController.swift; sourceTree = "<group>"; };
 		EBF44C0E2AAB2AD0002FC854 /* APICaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICaller.swift; sourceTree = "<group>"; };
 		EBF44C102AAB440F002FC854 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		EBF44C122AAB5D27002FC854 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,14 +55,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		EB0D72FB2AA9FF4D0049451F /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				EB0D72FC2AA9FF670049451F /* Extension+UIImage.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		EB7F6B412AA8822600837972 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +82,8 @@
 		EB7F6B442AA8827100837972 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EB0D72FC2AA9FF670049451F /* Extension+UIImage.swift */,
+				EBF44C122AAB5D27002FC854 /* Extension+String.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -120,7 +116,6 @@
 			isa = PBXGroup;
 			children = (
 				EB7F6B452AA8828100837972 /* Managers */,
-				EB0D72FB2AA9FF4D0049451F /* Extensions */,
 				EB7F6B442AA8827100837972 /* Resources */,
 				EB7F6B432AA8824100837972 /* Models */,
 				EB7F6B412AA8822600837972 /* Views */,
@@ -217,6 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBF44C132AAB5D27002FC854 /* Extension+String.swift in Sources */,
 				EB9CC3AF2AA7C9A300AF7E7F /* SearchViewController.swift in Sources */,
 				EB0D72FD2AA9FF670049451F /* Extension+UIImage.swift in Sources */,
 				EBF44C112AAB440F002FC854 /* Movie.swift in Sources */,

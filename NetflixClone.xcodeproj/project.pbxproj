@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB0D72FD2AA9FF670049451F /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0D72FC2AA9FF670049451F /* Extension+UIImage.swift */; };
+		EB2A0DDB2AAE35DC00709E1D /* PosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A0DDA2AAE35DC00709E1D /* PosterImageView.swift */; };
 		EB2A0DDE2AAE37D500709E1D /* TmdbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A0DDD2AAE37D500709E1D /* TmdbService.swift */; };
 		EB38A3752AAF511C00155315 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A3742AAF511C00155315 /* Sections.swift */; };
 		EB38A3772AAF515200155315 /* TmdbServiceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A3762AAF515200155315 /* TmdbServiceHelper.swift */; };
@@ -29,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		EB0D72FC2AA9FF670049451F /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
+		EB2A0DDA2AAE35DC00709E1D /* PosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageView.swift; sourceTree = "<group>"; };
 		EB2A0DDD2AAE37D500709E1D /* TmdbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbService.swift; sourceTree = "<group>"; };
 		EB38A3742AAF511C00155315 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
 		EB38A3762AAF515200155315 /* TmdbServiceHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbServiceHelper.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				EB7F6B462AA882C100837972 /* CollectionViewTableViewCell.swift */,
 				EB7F6B482AA8C4E900837972 /* HeroHeaderUIView.swift */,
+				EB2A0DDA2AAE35DC00709E1D /* PosterImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				EBF44C112AAB440F002FC854 /* Media.swift in Sources */,
 				EB38A3752AAF511C00155315 /* Sections.swift in Sources */,
 				EB2A0DDE2AAE37D500709E1D /* TmdbService.swift in Sources */,
+				EB2A0DDB2AAE35DC00709E1D /* PosterImageView.swift in Sources */,
 				EB9CC39A2AA7C58300AF7E7F /* MainTabBarViewController.swift in Sources */,
 				EB7F6B472AA882C100837972 /* CollectionViewTableViewCell.swift in Sources */,
 				EB7F6B492AA8C4E900837972 /* HeroHeaderUIView.swift in Sources */,

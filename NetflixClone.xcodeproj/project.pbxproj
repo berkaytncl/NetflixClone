@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		EB0D72FD2AA9FF670049451F /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0D72FC2AA9FF670049451F /* Extension+UIImage.swift */; };
+		EB2A0DD92AAE342B00709E1D /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A0DD82AAE342B00709E1D /* MediaCollectionViewCell.swift */; };
 		EB2A0DDB2AAE35DC00709E1D /* PosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A0DDA2AAE35DC00709E1D /* PosterImageView.swift */; };
 		EB2A0DDE2AAE37D500709E1D /* TmdbService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2A0DDD2AAE37D500709E1D /* TmdbService.swift */; };
 		EB38A3752AAF511C00155315 /* Sections.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB38A3742AAF511C00155315 /* Sections.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		EB0D72FC2AA9FF670049451F /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
+		EB2A0DD82AAE342B00709E1D /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB2A0DDA2AAE35DC00709E1D /* PosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageView.swift; sourceTree = "<group>"; };
 		EB2A0DDD2AAE37D500709E1D /* TmdbService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TmdbService.swift; sourceTree = "<group>"; };
 		EB38A3742AAF511C00155315 /* Sections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sections.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				EB7F6B462AA882C100837972 /* CollectionViewTableViewCell.swift */,
+				EB2A0DD82AAE342B00709E1D /* MediaCollectionViewCell.swift */,
 				EB7F6B482AA8C4E900837972 /* HeroHeaderUIView.swift */,
 				EB2A0DDA2AAE35DC00709E1D /* PosterImageView.swift */,
 			);
@@ -243,6 +246,7 @@
 				EB7F6B472AA882C100837972 /* CollectionViewTableViewCell.swift in Sources */,
 				EB7F6B492AA8C4E900837972 /* HeroHeaderUIView.swift in Sources */,
 				EB38A3772AAF515200155315 /* TmdbServiceHelper.swift in Sources */,
+				EB2A0DD92AAE342B00709E1D /* MediaCollectionViewCell.swift in Sources */,
 				EB9CC3B12AA7C9C200AF7E7F /* DownloadsViewController.swift in Sources */,
 				EB9CC3962AA7C58300AF7E7F /* AppDelegate.swift in Sources */,
 				EB9CC3982AA7C58300AF7E7F /* SceneDelegate.swift in Sources */,

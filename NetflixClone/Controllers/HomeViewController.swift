@@ -8,8 +8,10 @@
 import UIKit
 
 final class HomeViewController: UIViewController {
-
-    let sectionTitles: [String] = ["Trending movies", "Trending tv", "Popular", "Upcoming movies", "Top rated"]
+    
+    private let service = TmdbService()
+    
+    private var mediaResponses: [MediaResponse?] = [MediaResponse]()
     
     private var homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -28,7 +30,7 @@ final class HomeViewController: UIViewController {
         let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
         
-        getTrendingMovies()
+        fetchAllData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -59,21 +61,53 @@ extension HomeViewController {
         homeFeedTable.backgroundColor = .clear
     }
     
-    private func getTrendingMovies() {
-        APICaller.shared.getTrendingMovies { results in
-            switch results {
-            case .success(let movies):
-                print(movies)
-            case .failure(let error):
-                print(error)
-            }
+    private func fetchAllData() {
+        mediaResponses.removeAll()
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        self.fetchData(type: .getTrendingMoviesURL) {
+            group.leave()
+        }
+        
+        group.enter()
+        self.fetchData(type: .getTrendingTvsURL) {
+            group.leave()
+        }
+        
+        group.enter()
+        self.fetchData(type: .getPopularURL) {
+            group.leave()
+        }
+        
+        group.enter()
+        self.fetchData(type: .getUpcomingMoviesURL) {
+            group.leave()
+        }
+        
+        group.enter()
+        self.fetchData(type: .getTopRatedURL) {
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            self.homeFeedTable.reloadData()
+        }
+    }
+    
+    private func fetchData(type: APICallType, completion: @escaping () -> ())  {
+        service.APICall(type: type) { [weak self] result in
+            guard let result = result, let self = self else { return }
+            self.mediaResponses.append(result)
+            completion()
         }
     }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitles.count
+        return Sections.allCases.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,7 +116,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
-
+        guard let media = mediaResponses[indexPath.section]?.medias else { return UITableViewCell() }
+        
+        cell.configure(with: media)
+        
         return cell
     }
     
@@ -104,7 +141,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+        return Sections.allCases[section].mediaSections
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

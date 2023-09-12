@@ -29,7 +29,7 @@ extension APICallType: APICallProperties {
         case .getPopularURL:
             return "\(Constants.baseURL)/3/movie/popular?api_key=\(Constants.API_KEY)&language=en-US&page=1"
         case .getUpcomingMoviesURL:
-            return "\(Constants.baseURL)/3/trending/movie/day?api_key=\(Constants.API_KEY)&language=en-US&page=1"
+            return "\(Constants.baseURL)/3/movie/upcoming?api_key=\(Constants.API_KEY)&language=en-US&page=1"
         case .getTopRatedURL:
             return "\(Constants.baseURL)/3/movie/top_rated?api_key=\(Constants.API_KEY)&language=en-US&page=1"
         }

@@ -1,5 +1,5 @@
 //
-//  APICaller.swift
+//  NetworkManager.swift
 //  NetflixClone
 //
 //  Created by Berkay Tuncel on 8.09.2023.

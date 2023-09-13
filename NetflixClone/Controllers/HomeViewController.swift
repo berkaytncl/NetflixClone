@@ -11,7 +11,11 @@ final class HomeViewController: UIViewController {
     
     private let service = TmdbService()
     
-    private var mediaResponses: [MediaResponse?] = [MediaResponse]()
+    private var trendingMoviesMedia: [Media] = [Media]()
+    private var trendingTvsMedia: [Media] = [Media]()
+    private var popularMedia: [Media] = [Media]()
+    private var upcomingMoviesMedia: [Media] = [Media]()
+    private var topRatedMedia: [Media] = [Media]()
     
     private var homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -62,7 +66,11 @@ extension HomeViewController {
     }
     
     private func fetchAllData() {
-        mediaResponses.removeAll()
+        trendingMoviesMedia.removeAll()
+        trendingTvsMedia.removeAll()
+        popularMedia.removeAll()
+        upcomingMoviesMedia.removeAll()
+        topRatedMedia.removeAll()
         
         let group = DispatchGroup()
         
@@ -99,7 +107,20 @@ extension HomeViewController {
     private func fetchData(type: APICallType, completion: @escaping () -> ())  {
         service.APICall(type: type) { [weak self] result in
             guard let result = result, let self = self else { return }
-            self.mediaResponses.append(result)
+            switch type.rawValue {
+            case 0:
+                trendingMoviesMedia.append(contentsOf: result.medias)
+            case 1:
+                trendingTvsMedia.append(contentsOf: result.medias)
+            case 2:
+                popularMedia.append(contentsOf: result.medias)
+            case 3:
+                upcomingMoviesMedia.append(contentsOf: result.medias)
+            case 4:
+                topRatedMedia.append(contentsOf: result.medias)
+            default:
+                break
+            }
             completion()
         }
     }
@@ -116,9 +137,21 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
-        guard let media = mediaResponses[indexPath.section]?.medias else { return UITableViewCell() }
         
-        cell.configure(with: media)
+        switch indexPath.section {
+        case 0:
+            cell.configure(with: trendingMoviesMedia)
+        case 1:
+            cell.configure(with: trendingTvsMedia)
+        case 2:
+            cell.configure(with: popularMedia)
+        case 3:
+            cell.configure(with: upcomingMoviesMedia)
+        case 4:
+            cell.configure(with: topRatedMedia)
+        default:
+            break
+        }
         
         return cell
     }

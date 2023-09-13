@@ -11,9 +11,7 @@ final class PosterImageView: UIImageView {
 
     private var dataTask: URLSessionDataTask?
     
-    func downloadImage(with urlString: String) {
-        guard let url = URL(string: "asda\(urlString)") else { return }
-        
+    func downloadImage(url: URL) {
         dataTask = NetworkManager.shared.download(url: url) { [weak self] result in
             guard let self = self else { return }
             

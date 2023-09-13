@@ -39,19 +39,24 @@ final class CollectionViewTableViewCell: UITableViewCell {
         super.layoutSubviews()
         collectionView.frame = contentView.bounds
     }
-    
+}
+
+extension CollectionViewTableViewCell {
     public func configure(with medias: [Media]) {
         self.medias = medias
+        
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MediaCollectionViewCell.identifier, for: indexPath) as? MediaCollectionViewCell else { return UICollectionViewCell() }
+        guard let posterPath = medias[indexPath.item].posterPath else { return UICollectionViewCell() }
         
-        if let posterPath = medias[indexPath.section].posterPath {
-            //cell.configure(with: posterPath)
-        }
+        cell.configure(with: posterPath)
         
         return cell
     }

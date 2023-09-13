@@ -18,6 +18,7 @@ struct MediaResponse: Decodable {
 struct Media: Decodable {
     let id: Int
     let title: String?
+    let originalTitle: String?
     let mediaType: String?
     let posterPath: String?
     let overview: String?
@@ -27,6 +28,7 @@ struct Media: Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case title
+        case originalTitle = "original_title"
         case mediaType = "media_type"
         case posterPath = "poster_path"
         case overview

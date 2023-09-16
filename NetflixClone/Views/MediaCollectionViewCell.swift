@@ -37,7 +37,9 @@ final class MediaCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         posterImageView.frame = bounds
     }
-    
+}
+
+extension MediaCollectionViewCell {
     public func configure(with string: String) {
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(string)") else { return }
         posterImageView.downloadImage(url: url)

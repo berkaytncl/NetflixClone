@@ -11,6 +11,9 @@ final class HomeViewController: UIViewController {
     
     private let service = TmdbService()
     
+    private var randomTrendingMovie: Media?
+    private var headerView: HeroHeaderUIView?
+    
     private var trendingMoviesMedia: [Media] = [Media]()
     private var trendingTvsMedia: [Media] = [Media]()
     private var popularMedia: [Media] = [Media]()
@@ -31,7 +34,7 @@ final class HomeViewController: UIViewController {
         configureTableView()
         configureNavBar()
         
-        let headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
+        headerView = HeroHeaderUIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: 450))
         homeFeedTable.tableHeaderView = headerView
         
         fetchAllData()
@@ -65,12 +68,17 @@ extension HomeViewController {
         homeFeedTable.backgroundColor = .clear
     }
     
+    private func configureHeroHeaderView() {
+        guard let media = trendingMoviesMedia.randomElement() else { return }
+        
+        let title = media.title ?? media.originalTitle ?? ""
+        let posterPath = media.posterPath ?? ""
+        
+        headerView?.configure(with: PosterMedia(title: title, posterPath: posterPath))
+    }
+    
     private func fetchAllData() {
-        trendingMoviesMedia.removeAll()
-        trendingTvsMedia.removeAll()
-        popularMedia.removeAll()
-        upcomingMoviesMedia.removeAll()
-        topRatedMedia.removeAll()
+        removeAllDatas()
         
         let group = DispatchGroup()
         
@@ -101,6 +109,7 @@ extension HomeViewController {
         
         group.notify(queue: .main) {
             self.homeFeedTable.reloadData()
+            self.configureHeroHeaderView()
         }
     }
     
@@ -124,6 +133,14 @@ extension HomeViewController {
             completion()
         }
     }
+    
+    private func removeAllDatas() {
+        trendingMoviesMedia.removeAll()
+        trendingTvsMedia.removeAll()
+        popularMedia.removeAll()
+        upcomingMoviesMedia.removeAll()
+        topRatedMedia.removeAll()
+    }
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
@@ -137,6 +154,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
+        
+        cell.delegate = self
         
         switch indexPath.section {
         case 0:
@@ -182,5 +201,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         let offset = scrollView.contentOffset.y + defaultOffset
         
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
+    }
+}
+
+extension HomeViewController: CollectionViewTableViewCellDelegate {
+    func collectionViewTableViewCellDidTapCell(preview: PreviewYoutube) {
+        DispatchQueue.main.async {
+            let vc = PreviewViewController()
+            vc.configure(with: preview)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

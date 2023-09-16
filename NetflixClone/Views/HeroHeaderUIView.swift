@@ -12,7 +12,8 @@ final class HeroHeaderUIView: UIView {
     private let downloadButton: UIButton = {
         let button = UIButton()
         button.setTitle("Download", for: .normal)
-        button.layer.borderColor = UIColor.systemBackground.cgColor
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 5
@@ -22,18 +23,18 @@ final class HeroHeaderUIView: UIView {
     private let playButton: UIButton = {
        let button = UIButton()
         button.setTitle("Play", for: .normal)
-        button.layer.borderColor = UIColor.systemBackground.cgColor
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.layer.borderColor = UIColor.black.cgColor
         button.layer.borderWidth = 1
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 5
         return button
     }()
     
-    private let heroImageView: UIImageView = {
-        let imageView = UIImageView()
+    private let heroImageView: PosterImageView = {
+        let imageView = PosterImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.image = UIImage(named: "heroImage")
         return imageView
     }()
     
@@ -54,7 +55,9 @@ final class HeroHeaderUIView: UIView {
         super.layoutSubviews()
         heroImageView.frame = bounds
     }
-    
+}
+
+extension HeroHeaderUIView {
     private func addGradient() {
         let gradiantLayer = CAGradientLayer()
         gradiantLayer.colors = [
@@ -80,5 +83,10 @@ final class HeroHeaderUIView: UIView {
         
         NSLayoutConstraint.activate(playButtonConstraints)
         NSLayoutConstraint.activate(downloadButtonConstraints)
+    }
+    
+    public func configure(with model: PosterMedia) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(model.posterPath)") else { return }
+        heroImageView.downloadImage(url: url)
     }
 }

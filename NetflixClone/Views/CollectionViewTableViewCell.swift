@@ -7,9 +7,17 @@
 
 import UIKit
 
+protocol CollectionViewTableViewCellDelegate: AnyObject {
+    func collectionViewTableViewCellDidTapCell(preview: PreviewYoutube)
+}
+
 final class CollectionViewTableViewCell: UITableViewCell {
 
     static let identifier = "CollectionViewTableViewCell"
+    
+    public weak var delegate: CollectionViewTableViewCellDelegate?
+    
+    private let service = TmdbService()
     
     private var medias: [Media] = [Media]()
     
@@ -24,7 +32,6 @@ final class CollectionViewTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.backgroundColor = .systemPink
         contentView.addSubview(collectionView)
         
         collectionView.delegate = self
@@ -63,5 +70,22 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return medias.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        let media = medias[indexPath.row]
+        
+        guard let titleName = media.originalTitle ?? media.title else { return }
+        
+        service.getMovie(with: titleName + " trailer") { [weak self] result in
+            guard let self = self else { return }
+            guard let videoElement = result?.items.first else { return }
+            let overview = media.overview ?? ""
+            
+            let preview = PreviewYoutube(title: titleName, youtubeVideo: videoElement, titleOverview: overview)
+            
+            self.delegate?.collectionViewTableViewCellDidTapCell(preview: preview)
+        }
     }
 }

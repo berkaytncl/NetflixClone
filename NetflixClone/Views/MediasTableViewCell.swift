@@ -23,6 +23,7 @@ final class MediasTableViewCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 20, weight: .medium)
         label.setContentHuggingPriority(UILayoutPriority(1), for: .horizontal)
         return label
     }()

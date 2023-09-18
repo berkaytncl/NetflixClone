@@ -56,6 +56,19 @@ extension CollectionViewTableViewCell {
             self.collectionView.reloadData()
         }
     }
+    
+    private func downloadMedia(indexPath: IndexPath) {
+        let media = medias[indexPath.row]
+        
+        DataPersistenceManager.shared.downloadMediaWith(model: media) { result in
+            switch result {
+            case .success():
+                NotificationCenter.default.post(name: NSNotification.Name("downloaded"), object: nil)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 }
 
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -87,5 +100,15 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
             
             self.delegate?.collectionViewTableViewCellDidTapCell(preview: preview)
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let config = UIContextMenuConfiguration(actionProvider:  { [weak self] _ in
+            let downloadAction = UIAction(title: "Download", state: .off) { _ in
+                self?.downloadMedia(indexPath: indexPath)
+            }
+            return UIMenu(title: "", options: .displayInline, children: [downloadAction])
+        })
+        return config
     }
 }
